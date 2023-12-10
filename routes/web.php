@@ -21,6 +21,8 @@ Route::controller(OrderController::class)->group(function () {
     Route::get('/board/{id}', [App\Http\Controllers\ExpenseBoardsController::class,'index']);
 });
 
+Route::patch('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'update']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');

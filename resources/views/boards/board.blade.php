@@ -30,18 +30,24 @@
         
         <tbody>
             
-        <form method="POST" action="/board"></form>
+            @foreach ($boards as $board)
+        <form method="POST" action="/board/{{$board->id}}">
+            <input type="hidden" name="_method" value="PATCH">
+            @csrf
+        
+            @endforeach
 
             @foreach ($items as $item)
-          <tr id="row_{{$item->id}}"  class="font-normal">
+            <tr id="row_{{$item->id}}"  class="font-normal">
+                <input type="hidden" name="row_{{$item->id}}" value="{{$item->id}}"">
             <td>
-                <input type="checkbox" class="btn-check" name="status"  id="planned_checked_{{$item->id}}" autocomplete="off" {{$item->status}}>
+                <input type="checkbox" class="btn-check" name="status_{{$item->id}}" id="planned_checked_{{$item->id}}" autocomplete="off" value="checked" {{$item->status}}>
                 <label class="btn btn-sm" style=" padding: 0 4px" for="planned_checked_{{$item->id}}"><div class="font-normal" id="label_{{$item->id}}"></div></label>
             </td>
             <td class="font-normal fn-center" scope="row"><div class="mx-auto">{{$item->id}}</div></td>
-            <td class="font-normal"> <input class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemName}}"></td>
-            <td class="font-normal"> <input class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemDesc}}"></td>
-            <td class="font-normal"> <input class="edit-col input_change_{{$item->id}}" id="dengan-rupiah-{{$item->id}}" type="text" value="Rp. {{ number_format( $item->itemPrice, 0, '','.') }}"></td>
+            <td class="font-normal"> <input name="name_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemName}}"></td>
+            <td class="font-normal"> <input name="desc_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemDesc}}"></td>
+            <td class="font-normal"> <input name="price_{{$item->id}}" class="edit-col input_change_{{$item->id}}" id="dengan-rupiah-{{$item->id}}" type="text" value="Rp. {{ number_format( $item->itemPrice, 0, '','.') }}"></td>
             <td scope="col" class="hide">yes</td>
           </tr>
 
@@ -109,7 +115,7 @@
             </script>
           
           @endforeach
-
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
         </tbody>
