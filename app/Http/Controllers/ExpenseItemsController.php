@@ -77,7 +77,6 @@ class ExpenseItemsController extends Controller
                         ['id' => $request->input("row_".$p)],
                         [
                             'boardOwner' => $request->route('id'), 
-                            'status' => "unchecked", 
                             'itemName' => $request->input("name_".$p), 
                             'itemDesc' => $request->input("desc_".$p), 
                             'itemPrice' => str_replace(['+', '-'], '', filter_var($request->input("price_".$p), FILTER_SANITIZE_NUMBER_INT)), 

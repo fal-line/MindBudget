@@ -12,4 +12,12 @@ class expenseItems extends Model
     protected $fillable = [
         'itemName', 'itemDesc', 'itemPrice', 'updated_at', 'status', 'boardOwner'
     ];
+
+    
+    protected $attributes = [
+        'itemName' =>  'add a name ',
+        'itemDesc' => 'description about the item',
+        'itemPrice' => '0',
+        'status' => 'unchecked'
+    ];
 }

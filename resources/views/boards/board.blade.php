@@ -12,9 +12,27 @@
     <div class="row justify-content-center">
         <div class="row flex justify-content-center">
 
-            @foreach ($boards as $board)
-                <h1 class="big-title mb-4">{{$board->boardName}}</h1>
-            @endforeach
+            <div class="row g-3 justify-content-end">
+                <div class="col-sm-10">
+    
+                    @foreach ($boards as $board)
+                    <h1 class="big-title mb-4">{{$board->boardName}}</h1>
+                    @endforeach  
+    
+                </div>
+     
+                <div class="col align-self-center container text-center">
+                    
+                    <form method="POST" action="/board/{{$board->id}}">
+                        @csrf
+            
+                        <button type="submit" class="btn btn-secondary align-items-center container">
+                            <div class="text-center fs-5">Add a item</div>
+                        </button>
+                    </form>
+    
+                </div>
+            </div>
 
     <table class="table table-hover" style="table-layout: fixed;">
         <thead  class="header-big">
@@ -119,26 +137,10 @@
             </script>
           @endforeach
 
-          
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="commit-button" class="btn btn-secondary my-4" disabled= "disabled">
+                <div class="fs-5 fw-semibold">Save changes</div>
+            </button>
         </form>
-
-        <form method="POST" action="/board/{{$board->id}}">
-            @csrf
-
-            <button type="submit" class="btn btn-primary">addd</button>
-        </form>
-
-        {{-- <script>
-            // $(document).ready(function()){
-                $("#add-more-row").on("click", function() {
-                    $("#this-one").clone().appendTo( "tbody" ).find("input[type='text']").val("");
-                    console.log("I've been called");
-                });
-            // });
-        </script> --}}
-
-
 
         </tbody>
       </table>
@@ -147,15 +149,7 @@
     </div>
 </div>
 
-{{-- <script>
-$("#planned_checked_{{$item->id}}").change(function() {
-    if($(this).prop('checked')) {
-        alert("Checked Box Selected");
-    } else {
-        alert("Checked Box deselect");
-    }
-});
-</script> --}}
 <script src="../js/cur.js"></script>
+<script src="../js/update-btn.js"></script>
 
 @endsection
