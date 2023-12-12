@@ -18,10 +18,11 @@ Route::get('/', function () {
 });
 
 Route::controller(OrderController::class)->group(function () {
-    Route::get('/board/{id}', [App\Http\Controllers\ExpenseBoardsController::class,'index']);
+    Route::get('/board/{id}', [App\Http\Controllers\ExpenseBoardsController::class,'index'])->name('board-index');
+    Route::patch('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'update']);
+    Route::post('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'store']);
 });
 
-Route::patch('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'update']);
 
 Auth::routes();
 

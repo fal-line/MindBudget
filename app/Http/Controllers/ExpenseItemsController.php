@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\expenseItems;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\ExpenseBoardsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,7 +31,8 @@ class ExpenseItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        DB::insert('insert into expense_items (id, boardOwner, itemName, itemDesc, itemPrice, created_at, updated_at, status) values (?, ?, ?, ?, ?, ?, ?, ?)', [NULL, $request->route('id'), '', '', '0', NULL, NULL, 'unchecked']);
+        return redirect()->route('board-index', ['id' => $request->route('id')]);
     }
 
     /**
@@ -84,6 +86,13 @@ class ExpenseItemsController extends Controller
                         ]
                     );
 
+                }else{
+                    $expenseItems = expenseItems::updateOrCreate(
+                        ['id' => $request->input("row_".$p)],
+                        [
+                            'status' => "checked", 
+                        ]
+                    );
                 }
                 // array_push($a, $request->input("status_".$p));
                 // biggest honor for being a good debuging line
@@ -94,8 +103,7 @@ class ExpenseItemsController extends Controller
         // $j =  [$request->input("name_2"), $request->input("desc_2")];
 
         // return view(dd($j, $a, $expenseItems)
-        return view(dd($expenseItems, $a)
-            );
+        return redirect()->route('board-index', ['id' => $request->route('id')]);
     }
 
     /**

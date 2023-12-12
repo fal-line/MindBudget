@@ -38,7 +38,7 @@
             @endforeach
 
             @foreach ($items as $item)
-            <tr id="row_{{$item->id}}"  class="font-normal">
+        <tr id="row_{{$item->id}}"  class="font-normal">
                 <input type="hidden" name="row_{{$item->id}}" value="{{$item->id}}">
             <td>
                 <input type="checkbox" class="btn-check" name="status_{{$item->id}}" id="planned_checked_{{$item->id}}" autocomplete="off" value="{{$item->status}}" {{$item->status}}>
@@ -48,8 +48,8 @@
             <td class="font-normal"> <input name="name_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemName}}"></td>
             <td class="font-normal"> <input name="desc_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemDesc}}"></td>
             <td class="font-normal"> <input name="price_{{$item->id}}" class="edit-col input_change_{{$item->id}}" id="dengan-rupiah-{{$item->id}}" type="text" value="Rp. {{ number_format( $item->itemPrice, 0, '','.') }}"></td>
-            <td scope="col" class="hide">yes</td>
-          </tr>
+            {{-- <td scope="col" class="hide">yes</td> --}}
+        </tr>
 
           <script>
                 $(document).ready(function(){
@@ -117,10 +117,28 @@
 
             });
             </script>
-          
           @endforeach
+
+          
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        <form method="POST" action="/board/{{$board->id}}">
+            @csrf
+
+            <button type="submit" class="btn btn-primary">addd</button>
+        </form>
+
+        {{-- <script>
+            // $(document).ready(function()){
+                $("#add-more-row").on("click", function() {
+                    $("#this-one").clone().appendTo( "tbody" ).find("input[type='text']").val("");
+                    console.log("I've been called");
+                });
+            // });
+        </script> --}}
+
+
 
         </tbody>
       </table>
