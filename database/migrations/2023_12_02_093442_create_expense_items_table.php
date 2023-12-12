@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('boardOwner')
                     ->references('id')
                     ->on('expense_boards');
-            $table->char('itemName', 80);
-            $table->string('itemDesc', 800);
-            $table->integer('itemPrice');
-            $table->boolean('status');
+            $table->char('itemName', 80)->nullable();
+            $table->string('itemDesc', 800)->nullable();
+            $table->integer('itemPrice')->nullable();
+            $table->char('status', 9);
             $table->timestamps();
         });
     }

@@ -17,11 +17,9 @@ return new class extends Migration
             $table->foreignId('userOwner')
                     ->references('id')
                     ->on('users');
-            $table->char('boardName', 80);
-            $table->char('boardCur', 80);
-            // $table->dateTime('created_at', $precision = 0);
-            // $table->dateTime('edited_at', $precision = 0);
-            $table->enum('urgency', ['normal', 'important','priorities','urgent']);
+            $table->char('boardName', 80)->nullable();
+            $table->char('boardCur', 80)->nullable();
+            $table->char('urgency', 10);
             $table->timestamps();
         });
     }
