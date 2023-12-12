@@ -39,9 +39,9 @@
 
             @foreach ($items as $item)
             <tr id="row_{{$item->id}}"  class="font-normal">
-                <input type="hidden" name="row_{{$item->id}}" value="{{$item->id}}"">
+                <input type="hidden" name="row_{{$item->id}}" value="{{$item->id}}">
             <td>
-                <input type="checkbox" class="btn-check" name="status_{{$item->id}}" id="planned_checked_{{$item->id}}" autocomplete="off" value="checked" {{$item->status}}>
+                <input type="checkbox" class="btn-check" name="status_{{$item->id}}" id="planned_checked_{{$item->id}}" autocomplete="off" value="{{$item->status}}" {{$item->status}}>
                 <label class="btn btn-sm" style=" padding: 0 4px" for="planned_checked_{{$item->id}}"><div class="font-normal" id="label_{{$item->id}}"></div></label>
             </td>
             <td class="font-normal fn-center" scope="row"><div class="mx-auto">{{$item->id}}</div></td>
@@ -55,12 +55,14 @@
                 $(document).ready(function(){
                     if($("#planned_checked_{{$item->id}}").prop('checked')) {
                         $(".input_change_{{$item->id}}").attr('disabled', true),
+                        $("input[name=status_{{$item->id}}]").val("checked"),
                         $(".input_change_{{$item->id}}").addClass( "table-dark text-decoration-line-through" ),
                         $("#row_{{$item->id}}").addClass( "table-dark text-decoration-line-through" ),
                         $( "#label_{{$item->id}}" ).html("Undone");
                     } else {
                         $(".input_change_{{$item->id}}").removeClass( "table-dark text-decoration-line-through" ),
                         $(".input_change_{{$item->id}}").attr('disabled', false),
+                        // $("input[name=status_{{$item->id}}]").val("unchecked"),
                         $(".input_change_{{$item->id}}").addClass( "table-light" ),
                         $("#row_{{$item->id}}").removeClass( "table-dark text-decoration-line-through" ),
                         $( "#label_{{$item->id}}" ).html("Done");
@@ -69,11 +71,13 @@
                         if($(this).prop('checked')) {
                             $(".input_change_{{$item->id}}").addClass( "table-dark text-decoration-line-through" ),
                             $(".input_change_{{$item->id}}").attr('disabled', true),
+                            $("input[name=status_{{$item->id}}]").val("checked"),
                             $("#row_{{$item->id}}").addClass( "table-dark text-decoration-line-through" ),
                             $( "#label_{{$item->id}}" ).html("Undone");
                         } else {
                             $(".input_change_{{$item->id}}").removeClass( "table-dark text-decoration-line-through" ),
-                        $(".input_change_{{$item->id}}").attr('disabled', false),
+                        // $("input[name=status_{{$item->id}}]").val("unchecked"),
+                            $(".input_change_{{$item->id}}").attr('disabled', false),
                             $(".input_change_{{$item->id}}").addClass( "table-light" ),
                             $("#row_{{$item->id}}").removeClass( "table-dark text-decoration-line-through" ),
                             $( "#label_{{$item->id}}" ).html("Done");

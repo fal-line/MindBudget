@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class expenseItems extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'itemName', 'itemDesc', 'itemPrice', 'updated_at', 'status', 'boardOwner'
+    ];
 }

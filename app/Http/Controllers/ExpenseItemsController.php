@@ -54,55 +54,47 @@ class ExpenseItemsController extends Controller
      */
     public function update(Request $request, expenseItems $expenseItems)
     {
+        
+        date_default_timezone_set('Asia/Jakarta');
+        
         $items = DB::table('expense_items')
         ->where('boardOwner', $request->route('id'))
         ->select('id')
         ->get();
 
+        
+        $a = [];
+        // love u bro :*
 
-        $rowData = [];
         foreach($items as $i){
             foreach($i as $p){
-                array_push($rowData, $p = "row_".$p);
+
+                if($request->input("status_".$p)==''){
+                    
+                    $expenseItems = expenseItems::updateOrCreate(
+                        ['id' => $request->input("row_".$p)],
+                        [
+                            'boardOwner' => $request->route('id'), 
+                            'status' => "unchecked", 
+                            'itemName' => $request->input("name_".$p), 
+                            'itemDesc' => $request->input("desc_".$p), 
+                            'itemPrice' => str_replace(['+', '-'], '', filter_var($request->input("price_".$p), FILTER_SANITIZE_NUMBER_INT)), 
+                            
+                            'updated_at' => now()
+                        ]
+                    );
+
+                }
+                // array_push($a, $request->input("status_".$p));
+                // biggest honor for being a good debuging line
             }
         }
 
-        $a = [];
-        $j =  [$request->input("name_2"), $request->input("desc_2")];
-        // foreach () {
 
-        //     $i = $reqs;
-        //     array_push($a, $i);
+        // $j =  [$request->input("name_2"), $request->input("desc_2")];
 
-        //     // DB::table('expense_items')->upsert([
-        //     //     ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
-        //     //     ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
-        //     // ], ['departure', 'destination'], ['price']);
-            
-        // }
-
-        // $a = [];
-        // foreach ($request as $x) {
-        //     $i = $x;
-        //     array_push($a, $i);
-
-        //     // DB::table('expense_items')->upsert([
-        //     //     ['departure' => 'Oakland', 'destination' => 'San Diego', 'price' => 99],
-        //     //     ['departure' => 'Chicago', 'destination' => 'New York', 'price' => 150]
-        //     // ], ['departure', 'destination'], ['price']);
-            
-        // }
-        
-
-
-        // $b = [];
-        // foreach($items as $i){
-        //     foreach($i as $p){
-        //         array_push($b, "row_".$p);
-        //     }
-        // }
-
-        return view(dd($j, $a, $rowData)
+        // return view(dd($j, $a, $expenseItems)
+        return view(dd($expenseItems, $a)
             );
     }
 
