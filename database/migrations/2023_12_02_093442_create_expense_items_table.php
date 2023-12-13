@@ -16,7 +16,8 @@ return new class extends Migration
             // $table->unsignedBigInteger('boardOwner');
             $table->foreignId('boardOwner')
                     ->references('id')
-                    ->on('expense_boards');
+                    ->on('expense_boards')
+                    ->onDelete('cascade');
             $table->char('itemName', 80)->nullable();
             $table->string('itemDesc', 800)->nullable();
             $table->integer('itemPrice')->nullable();
