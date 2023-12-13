@@ -7,9 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\ExpenseBoardsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ExpenseItemsController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      */

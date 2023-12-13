@@ -13,21 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::controller(OrderController::class)->group(function () {
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
+
+    Route::post('/board', [App\Http\Controllers\ExpenseBoardsController::class,'store']);
+
     Route::get('/board/{id}', [App\Http\Controllers\ExpenseBoardsController::class,'index'])->name('board-index');
     Route::patch('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'update']);
     Route::post('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'store']);
 });
 
-
-Route::controller(OrderController::class)->group(function () {
-    Route::post('/board', [App\Http\Controllers\ExpenseBoardsController::class,'store']);
+Route::get('', function () {
+    return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
