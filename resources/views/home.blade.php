@@ -37,7 +37,7 @@
                           <h5 class="card-title">
                             <a class="fw-semibold fs-3 child-click link-dark link-offset-2 link-underline-opacity-0" href="board/{{$board->id}}">{{$board->boardName}}</a>
                           </h5>
-                          <p class="card-text fs-6">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <p class="card-text fs-6">There should be a descriptive text here, but somehow due to slim working time this text represent the descriptive text until the actual text can be here.</p>
                         </div>
                         <div class="card-footer">{{$board->created_at}}</div>
                       </div>

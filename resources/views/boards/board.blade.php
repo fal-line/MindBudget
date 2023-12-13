@@ -14,9 +14,16 @@
 
             <div class="row g-3 justify-content-end">
                 <div class="col-sm-9">
-    
+                    <a href="{{ url('home') }}" class="link-secondary link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover fs-5">>>Back to home</a>
                     @foreach ($boards as $board)
-                    <h1 class="big-title mb-4">{{$board->boardName}}</h1>
+                    <h1 class="big-title mb-4">
+                        {{-- {{$board->boardName}} --}}
+                        <form method="POST" action="/board">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                            <input name="board_name" class="edit-col" type="text" value="{{$board->boardName}}">
+                        </form>
+                    </h1>
                     @endforeach  
     
                 </div>

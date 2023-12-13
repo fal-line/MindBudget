@@ -76,7 +76,12 @@ class ExpenseBoardsController extends Controller
      */
     public function update(Request $request, expenseBoards $expenseBoards)
     {
-        //
+        expenseBoards::where($request->route('id'))
+                    ->update([
+                        'boardName' => $request->board_name
+                    ]);
+                    return redirect()->route('home');
+                  
     }
 
     /**

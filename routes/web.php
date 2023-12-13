@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/board', [App\Http\Controllers\ExpenseBoardsController::class,'store']);
     Route::delete('/board', [App\Http\Controllers\ExpenseBoardsController::class,'destroy']);
+    Route::patch('/board', [App\Http\Controllers\ExpenseBoardsController::class,'update']);
 
     Route::get('/board/{id}', [App\Http\Controllers\ExpenseBoardsController::class,'index'])->name('board-index');
     Route::patch('/board/{id}', [App\Http\Controllers\ExpenseItemsController::class,'update']);
