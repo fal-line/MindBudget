@@ -13,7 +13,7 @@
         <div class="row flex justify-content-center">
 
             <div class="row g-3 justify-content-end">
-                <div class="col-sm-10">
+                <div class="col-sm-9">
     
                     @foreach ($boards as $board)
                     <h1 class="big-title mb-4">{{$board->boardName}}</h1>
@@ -22,14 +22,35 @@
                 </div>
      
                 <div class="col align-self-center container text-center">
-                    
-                    <form method="POST" action="/board/{{$board->id}}">
-                        @csrf
-            
-                        <button type="submit" class="btn btn-secondary align-items-center container">
-                            <div class="text-center fs-5">Add a item</div>
-                        </button>
-                    </form>
+                    <form id="form_hybrid" method="POST" action="/board/{{$board->id}}">
+                    <input type="hidden" name="board-target" value="@foreach($boards as $board){{$board->id}}@endforeach">
+                    <input id="remove_board_input" type="hidden" name=" " value="DELETE">
+                    <div class=" input-group">
+                            @csrf
+                
+                            <button type="submit" class="btn btn-secondary align-items-center form-control ms-5" style="border-radius: 6px 0 0 6px;">
+                                <div class="text-center fs-5">Add a item</div>
+                            </button>
+
+                        <button class="btn btn-outline-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">More</button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <button type="submit" id="remove_board" class="dropdown-item" style="color: red">
+                                        <div class="text-center fw-bold">Delete "@foreach($boards as $board){{$board->boardName}}@endforeach"  board </div>
+                                    </button>
+                                    {{-- <a class="dropdown-item" style="color: red" href="#">Delete "@foreach($boards as $board){{$board->boardName}}@endforeach"  board </a> --}}
+                                </li>
+                            </ul>   
+                            
+                        </form>
+                    </div>
+
+                    <script>
+                        $("#remove_board").on("click", function() {
+                            $("#remove_board_input").attr('name', '_method'),
+                            $("#form_hybrid").attr('action', '/board');
+                        });
+                    </script>
     
                 </div>
             </div>
@@ -37,12 +58,12 @@
     <table class="table table-hover" style="table-layout: fixed;">
         <thead  class="header-big">
           <tr>
-            <th scope="col" style="width: 10%;"></th>
-            <th scope="col" style="width: 5%;">No</th>
+            <th scope="col" style="width: 8%;"></th>
+            <th scope="col" style="width: 5%;" class="fn-center ">No</th>
             <th scope="col">Item</th>
             <th scope="col">Note</th>
             <th scope="col">Price</th>
-            <th scope="col"  style="width: 10%;" class="hide">Action</th>
+            <th scope="col"  style="width: 10%;" class="fn-center">Action</th>
           </tr>
         </thead>
         
@@ -74,8 +95,27 @@
             <td class="font-normal"> <input name="name_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemName}}"></td>
             <td class="font-normal"> <input name="desc_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemDesc}}"></td>
             <td class="font-normal"> <input name="price_{{$item->id}}" class="edit-col input_change_{{$item->id}}" id="dengan-rupiah-{{$item->id}}" type="text" value="Rp. {{ number_format( $item->itemPrice, 0, '','.') }}"></td>
-            {{-- <td scope="col" class="hide">yes</td> --}}
+            
+            <td class="font-normal fn-center"> 
+                {{-- <form method="POST" action="/board/{{$board->id}}">
+                    @method('delete')
+                    @csrf
+        
+                    
+                </form> --}}
+                <input type="hidden" name="delete-target" value="{{$item->id}}">
+                <button id="remove_{{$item->id}}" type="submit" style=" padding: 0 8px"  class="btn btn-sm btn-outline-danger align-items-center fs-5">
+                    X
+                </button>
+            </td>
         </tr>
+
+        <script>
+            
+            $("#remove_{{$item->id}}").on("click", function() {
+                $("input[name=_method]").val("DELETE")
+            });
+        </script>
 
           <script>
                 $(document).ready(function(){
@@ -109,6 +149,7 @@
                             $( "#label_{{$item->id}}" ).html("Done");
                         }
                     });
+
             });
           </script>
 

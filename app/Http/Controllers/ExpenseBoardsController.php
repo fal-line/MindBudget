@@ -82,8 +82,11 @@ class ExpenseBoardsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(expenseBoards $expenseBoards)
+    public function destroy(Request $request, expenseBoards $expenseBoards)
     {
-        //
+        expenseBoards::destroy($request->input("board-target"));
+        // return view(dd($request->input("board-target")));
+        return redirect()->route('home');
+    
     }
 }

@@ -72,7 +72,7 @@ class ExpenseItemsController extends Controller
         ->get();
 
         
-        $a = [];
+        // $a = [];
         // love u bro :*
 
         foreach($items as $i){
@@ -115,8 +115,10 @@ class ExpenseItemsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(expenseItems $expenseItems)
+    public function destroy(Request $request, expenseItems $expenseItems)
     {
-        //
+        expenseItems::destroy($request->input("delete-target"));
+        // return view(dd($request->input("delete-target")));
+        return redirect()->route('board-index', ['id' => $request->route('id')]);
     }
 }
