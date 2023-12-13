@@ -11,7 +11,14 @@
                 <div class="card-header d-flex align-items-center">
                     <div class="flex-fill fs-2">{{ __('Budgetboard') }}</div>
                     <div class="flex-shrink-1">
-                        <a class="btn btn-success" href="board/new" role="button"> Add new board</a>
+                        <form method="POST" action="/board">
+                            <div class="input-group mx-3">
+                                @csrf
+                                <input type="text" class="form-control" placeholder="board name" name="board-name">
+                                <button type="submit" class="btn btn-outline-success">Add new board</button>
+                            </div>
+                        </form>
+                        {{-- <a class="btn btn-success" href="board/new" role="button"> Add new board</a> --}}
                     </div>
                 </div>
             </div>

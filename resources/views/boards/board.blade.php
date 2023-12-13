@@ -55,6 +55,9 @@
         
             @endforeach
 
+            <script>
+                num = 0;
+            </script>
             @foreach ($items as $item)
         <tr id="row_{{$item->id}}"  class="font-normal">
                 <input type="hidden" name="row_{{$item->id}}" value="{{$item->id}}">
@@ -62,7 +65,12 @@
                 <input type="checkbox" class="btn-check" name="status_{{$item->id}}" id="planned_checked_{{$item->id}}" autocomplete="off" value="{{$item->status}}" {{$item->status}}>
                 <label class="btn btn-sm" style=" padding: 0 4px" for="planned_checked_{{$item->id}}"><div class="font-normal" id="label_{{$item->id}}"></div></label>
             </td>
-            <td class="font-normal fn-center" scope="row"><div class="mx-auto">{{$item->id}}</div></td>
+            <td class="font-normal fn-center" id="number_row_{{$item->id}}">
+                <script>
+                    num++;
+                  $( "#number_row_{{$item->id}}" ).html(num);
+                </script>
+            </td>
             <td class="font-normal"> <input name="name_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemName}}"></td>
             <td class="font-normal"> <input name="desc_{{$item->id}}" class="edit-col input_change_{{$item->id}}" type="text" value="{{$item->itemDesc}}"></td>
             <td class="font-normal"> <input name="price_{{$item->id}}" class="edit-col input_change_{{$item->id}}" id="dengan-rupiah-{{$item->id}}" type="text" value="Rp. {{ number_format( $item->itemPrice, 0, '','.') }}"></td>
@@ -135,6 +143,7 @@
 
             });
             </script>
+
           @endforeach
 
             <button type="submit" id="commit-button" class="btn btn-secondary my-4" disabled= "disabled">

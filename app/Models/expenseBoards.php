@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class expenseBoards extends Model
 {
     use HasFactory;
+
+    
+    protected $fillable = [
+        'userOwner', 'boardName', 'boardCur', 'urgency', 'created_at', 'updated_at'
+    ];
 }

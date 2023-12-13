@@ -31,7 +31,7 @@ class ExpenseItemsController extends Controller
      */
     public function store(Request $request)
     {
-        DB::insert('insert into expense_items (id, boardOwner, itemName, itemDesc, itemPrice, created_at, updated_at, status) values (?, ?, ?, ?, ?, ?, ?, ?)', [NULL, $request->route('id'), '', '', '0', NULL, NULL, 'unchecked']);
+        DB::insert('insert into expense_items (id, boardOwner, itemName, itemDesc, itemPrice, created_at, updated_at, status) values (?, ?, ?, ?, ?, ?, ?, ?)', [NULL, $request->route('id'), '', '', NULL, NULL, NULL, 'unchecked']);
         return redirect()->route('board-index', ['id' => $request->route('id')]);
     }
 

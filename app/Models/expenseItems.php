@@ -14,10 +14,10 @@ class expenseItems extends Model
     ];
 
     
-    protected $attributes = [
-        'itemName' =>  'add a name ',
-        'itemDesc' => 'description about the item',
-        'itemPrice' => '0',
-        'status' => 'unchecked'
-    ];
+    // protected $attributes = [
+    //     'itemName' =>  'add a name ',
+    //     'itemDesc' => 'description about the item',
+    //     'itemPrice' => '0',
+    //     'status' => 'unchecked'
+    // ];
 }

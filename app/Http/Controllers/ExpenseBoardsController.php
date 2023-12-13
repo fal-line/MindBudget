@@ -40,7 +40,19 @@ class ExpenseBoardsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        date_default_timezone_set('Asia/Jakarta');
+        
+        if($request->input("board-name") == ' '){
+            $boardNameVar = ' ';
+        }else{
+            $boardNameVar = $request->input("board-name");
+        }
+        
+
+
+        DB::insert('insert into expense_boards (id, userOwner, boardName, boardCur, urgency, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ?)', [NULL, Auth::user()->id, $boardNameVar, 'IDR', 'normal', now(), now()]);
+        return redirect()->route('home');
     }
 
     /**

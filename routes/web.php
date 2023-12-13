@@ -24,6 +24,10 @@ Route::controller(OrderController::class)->group(function () {
 });
 
 
+Route::controller(OrderController::class)->group(function () {
+    Route::post('/board', [App\Http\Controllers\ExpenseBoardsController::class,'store']);
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class,'index'])->name('home');
