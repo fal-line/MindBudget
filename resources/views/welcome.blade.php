@@ -48,10 +48,21 @@
                 <div class="mt-5">
                     <div class="grid grid-cols-1 md:grid-cols-1 gap-6 lg:gap-8 px-5 ">
                         <h2 class="mt-6 flex justify-center font-semibold dark:text-white p-2" style="font-size: 3rem">New way to spend money</h2> 
-                        <form class="d-flex px-5" role="search" method="GET" action="boards">
-                            <input name="preBoard" class="form-control me-2 p-2 px-3"  style="font-size: 1.2rem" type="text" placeholder="Shopping List" aria-label="Search">
-                            {{-- value="Rp. {{ number_format( 0, 0, '','.') }}" //usefull later --}}
-                            <button class="btn btn-outline-primary font-semibold text-white" type="submit" value="submit">Create</button>
+                        
+                        {{-- <form method="POST" action="/board">
+                            <div class="input-group mx-3">
+                                @csrf
+                                <input type="text" class="form-control" placeholder="board name" name="board-name">
+                                <button type="submit" class="btn btn-outline-success">Add new board</button>
+                            </div>
+                        </form> --}}
+                        <form class="d-flex px-5" method="POST" action="/board">
+                            
+                            <div class="input-group mx-3">
+                            @csrf
+                                <input type="text" class="form-control  fs-5 p-2 px-3" style="border-radius: 7px 0 0 7px" placeholder="Shopping List" name="board-name">
+                                <button class="btn btn-outline-primary font-semibold text-white fs-5" type="submit" value="submit">Create</button>
+                            </div>
                         </form>
 
                         <div class="mt-5 flex justify-center">

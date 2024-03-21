@@ -24,6 +24,7 @@ class ExpenseBoardsController extends Controller
             ->where('boardOwner', $request->route('id'))
             ->select('id', 'itemName', 'itemDesc','itemPrice','status')
             ->get();
+
         return view('boards/board', ['boards' => $boards, 'items' => $items]);
     }
 
